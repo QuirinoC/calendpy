@@ -1,0 +1,34 @@
+//Test token
+curl -v --header "X-TOKEN: <your_token>" https://calendly.com/api/v1/echo
+
+//Create a webhook subscription for created events by invitee
+curl \
+--header "X-TOKEN: <your_token>" \
+--data "url=https://blah.foo/bar" \
+--data "events[]=invitee.created" \
+https://calendly.com/api/v1/hooks
+
+//Create a webhook subscription for cancelled events by invitee
+curl \
+--header "X-TOKEN: <your_token>" \
+--data "url=https://blah.foo/bar" \
+--data "events[]=invitee.canceled" \
+https://calendly.com/api/v1/hooks
+
+//Create a webhook subscription for all events by invitee
+curl \
+--header "X-TOKEN: <your_token>" \
+--data "url=https://blah.foo/bar" \
+--data "events[]=invitee.created" \
+--data "events[]=invitee.canceled" \
+https://calendly.com/api/v1/hooks
+
+//Get subscriptions - where hook_id is the id retrieved by the subscription 
+//Id can be obtained by the next example
+curl --header "X-TOKEN: <your_token>" https://calendly.com/api/v1/hooks/<hook_id>
+
+//Get list of hooks
+curl --header "X-TOKEN: <your_token>" https://calendly.com/api/v1/hooks
+
+//Delete subscription 
+curl  -X DELETE --header "X-TOKEN: <your_token>" https://calendly.com/api/v1/hooks/<hook_id>
